@@ -21,3 +21,17 @@ describe('Sum Function', () => {
     expect(sum(2, 3)).toBe(5);
   });
 });
+
+
+beforeAll(() => {
+  server = app.listen(3001); // Start the server before tests
+});
+
+afterAll(() => {
+  server.close(); // Close the server after tests
+});
+
+
+const res = await request(app).get('/ping');
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ message: 'pong' });
